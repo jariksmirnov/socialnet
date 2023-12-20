@@ -5,7 +5,7 @@ Small testing project on creation social network
 Using API
 
 1. Runserver on 8000
-2. Get authorization token http://127.0.0.1:8000/api/token/ POST Username: admin Password: Qaz.1975
+2. Authorization http://127.0.0.1:8000/api/token/ POST Username: admin Password: Qaz.1975
 3. Then using 'access' part of json that put in bearer token part of request
 4. Posting new user http://127.0.0.1:8000/api/users/ POST with JSON 
 {
@@ -18,7 +18,7 @@ Using API
     "content": "  ",
     "post_image": "way to your image" or omit
 }
-6. Posting a vote http://127.0.0.1:8000/api/posts/ POST with JSON
+6. Posting a vote http://127.0.0.1:8000/api/votes/ POST with JSON
 {
     "post": <id>,
     "up_vote"/"down_vote: true

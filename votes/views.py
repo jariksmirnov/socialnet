@@ -12,13 +12,13 @@ class VoteViewSet(viewsets.ModelViewSet):
     permission_classes = [permissions.IsAuthenticatedOrReadOnly, HasSelfVotedOrReadOnly]
 
     def perform_create(self, serializer):
-        post_instance = get_object_or_404(Post, pk=self.request.data['posts'])
+        post_instance = get_object_or_404(Post, pk=self.request.data['post'])
 
-        # if user likes the posts
+        # if user likes the post
         if self.request.data['up_vote']:
             already_up_voted = Vote.objects.filter(post=post_instance, up_vote_by=self.request.user).exists()
             if already_up_voted:
-                raise serializers.ValidationError({"message": "You have already liked this posts"})
+                raise serializers.ValidationError({"message": "You have already liked this post"})
             else:
                 serializer.save(up_vote_by=self.request.user, post=post_instance)
 
@@ -26,6 +26,6 @@ class VoteViewSet(viewsets.ModelViewSet):
         else:
             already_down_voted = Vote.objects.filter(post=post_instance, down_vote_by=self.request.user).exists()
             if already_down_voted:
-                raise serializers.ValidationError({"message": "You have already disliked this posts"})
+                raise serializers.ValidationError({"message": "You have already disliked this post"})
             else:
                 serializer.save(down_vote_by=self.request.user, post=post_instance)
